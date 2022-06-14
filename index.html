@@ -1,0 +1,1155 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/MadinatQurtuba_1.js"></script>
+        <script src="data/Mudunlayer_2.js"></script>
+        <script src="data/Mosques_3.js"></script>
+        <script src="data/Monasteriescertain_4.js"></script>
+        <script src="data/Churchesuncertain_5.js"></script>
+        <script src="data/Monasteriesuncertain_6.js"></script>
+        <script src="data/Others_7.js"></script>
+        <script src="data/Churchescertain_8.js"></script>
+        <script src="data/Necropoli_9.js"></script>
+        <script src="data/Monasteries_10.js"></script>
+        <script src="data/Martyrium_11.js"></script>
+        <script src="data/Toledo_12.js"></script>
+        <script src="data/RomanremainsToledo_13.js"></script>
+        <script src="data/ChurchesToledo_14.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[39.71908883522218,-4.257373769431047],[39.94808650675466,-3.8911242883582626]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_EsriGraylight_0');
+        map.getPane('pane_EsriGraylight_0').style.zIndex = 400;
+        var layer_EsriGraylight_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_EsriGraylight_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 16
+        });
+        layer_EsriGraylight_0;
+        map.addLayer(layer_EsriGraylight_0);
+        function pop_MadinatQurtuba_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MadinatQurtuba_1_0() {
+            return {
+                pane: 'pane_MadinatQurtuba_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,194,128,0.47843137254901963)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MadinatQurtuba_1');
+        map.getPane('pane_MadinatQurtuba_1').style.zIndex = 401;
+        map.getPane('pane_MadinatQurtuba_1').style['mix-blend-mode'] = 'normal';
+        var layer_MadinatQurtuba_1 = new L.geoJson(json_MadinatQurtuba_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MadinatQurtuba_1',
+            layerName: 'layer_MadinatQurtuba_1',
+            pane: 'pane_MadinatQurtuba_1',
+            onEachFeature: pop_MadinatQurtuba_1,
+            style: style_MadinatQurtuba_1_0,
+        });
+        bounds_group.addLayer(layer_MadinatQurtuba_1);
+        map.addLayer(layer_MadinatQurtuba_1);
+        function pop_Mudunlayer_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Mudunlayer_2_0() {
+            return {
+                pane: 'pane_Mudunlayer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,133,143,0.403921568627451)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Mudunlayer_2');
+        map.getPane('pane_Mudunlayer_2').style.zIndex = 402;
+        map.getPane('pane_Mudunlayer_2').style['mix-blend-mode'] = 'normal';
+        var layer_Mudunlayer_2 = new L.geoJson(json_Mudunlayer_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Mudunlayer_2',
+            layerName: 'layer_Mudunlayer_2',
+            pane: 'pane_Mudunlayer_2',
+            onEachFeature: pop_Mudunlayer_2,
+            style: style_Mudunlayer_2_0,
+        });
+        bounds_group.addLayer(layer_Mudunlayer_2);
+        map.addLayer(layer_Mudunlayer_2);
+        function pop_Mosques_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Period</th>\
+                        <td>' + (feature.properties['Period'] !== null ? autolinker.link(feature.properties['Period'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info</th>\
+                        <td>' + (feature.properties['Info'] !== null ? autolinker.link(feature.properties['Info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Mosques_3_0() {
+            return {
+                pane: 'pane_Mosques_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(16,38,175,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Mosques_3');
+        map.getPane('pane_Mosques_3').style.zIndex = 403;
+        map.getPane('pane_Mosques_3').style['mix-blend-mode'] = 'normal';
+        var layer_Mosques_3 = new L.geoJson(json_Mosques_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Mosques_3',
+            layerName: 'layer_Mosques_3',
+            pane: 'pane_Mosques_3',
+            onEachFeature: pop_Mosques_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Mosques_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Mosques_3);
+        map.addLayer(layer_Mosques_3);
+        function pop_Monasteriescertain_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Start date</th>\
+                        <td>' + (feature.properties['Start date'] !== null ? autolinker.link(feature.properties['Start date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">End date</th>\
+                        <td>' + (feature.properties['End date'] !== null ? autolinker.link(feature.properties['End date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Saint</th>\
+                        <td>' + (feature.properties['Saint'] !== null ? autolinker.link(feature.properties['Saint'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Martyrs</th>\
+                        <td>' + (feature.properties['Martyrs'] !== null ? autolinker.link(feature.properties['Martyrs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Calendar</th>\
+                        <td>' + (feature.properties['Calendar'] !== null ? autolinker.link(feature.properties['Calendar'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Add. info</th>\
+                        <td>' + (feature.properties['Add. info'] !== null ? autolinker.link(feature.properties['Add. info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Monasteriescertain_4_0() {
+            return {
+                pane: 'pane_Monasteriescertain_4',
+                radius: 4.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(106,4,143,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Monasteriescertain_4');
+        map.getPane('pane_Monasteriescertain_4').style.zIndex = 404;
+        map.getPane('pane_Monasteriescertain_4').style['mix-blend-mode'] = 'normal';
+        var layer_Monasteriescertain_4 = new L.geoJson(json_Monasteriescertain_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Monasteriescertain_4',
+            layerName: 'layer_Monasteriescertain_4',
+            pane: 'pane_Monasteriescertain_4',
+            onEachFeature: pop_Monasteriescertain_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Monasteriescertain_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Monasteriescertain_4);
+        map.addLayer(layer_Monasteriescertain_4);
+        function pop_Churchesuncertain_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Start date</th>\
+                        <td>' + (feature.properties['Start date'] !== null ? autolinker.link(feature.properties['Start date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">End date</th>\
+                        <td>' + (feature.properties['End date'] !== null ? autolinker.link(feature.properties['End date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Saint</th>\
+                        <td>' + (feature.properties['Saint'] !== null ? autolinker.link(feature.properties['Saint'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Churchesuncertain_5_0() {
+            return {
+                pane: 'pane_Churchesuncertain_5',
+                shape: 'triangle',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(118,195,154,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Churchesuncertain_5');
+        map.getPane('pane_Churchesuncertain_5').style.zIndex = 405;
+        map.getPane('pane_Churchesuncertain_5').style['mix-blend-mode'] = 'normal';
+        var layer_Churchesuncertain_5 = new L.geoJson(json_Churchesuncertain_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Churchesuncertain_5',
+            layerName: 'layer_Churchesuncertain_5',
+            pane: 'pane_Churchesuncertain_5',
+            onEachFeature: pop_Churchesuncertain_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Churchesuncertain_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Churchesuncertain_5);
+        map.addLayer(layer_Churchesuncertain_5);
+        function pop_Monasteriesuncertain_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Start date</th>\
+                        <td>' + (feature.properties['Start date'] !== null ? autolinker.link(feature.properties['Start date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">End date</th>\
+                        <td>' + (feature.properties['End date'] !== null ? autolinker.link(feature.properties['End date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Saint</th>\
+                        <td>' + (feature.properties['Saint'] !== null ? autolinker.link(feature.properties['Saint'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Martyrs</th>\
+                        <td>' + (feature.properties['Martyrs'] !== null ? autolinker.link(feature.properties['Martyrs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Calendar</th>\
+                        <td>' + (feature.properties['Calendar'] !== null ? autolinker.link(feature.properties['Calendar'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info</th>\
+                        <td>' + (feature.properties['Info'] !== null ? autolinker.link(feature.properties['Info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Monasteriesuncertain_6_0() {
+            return {
+                pane: 'pane_Monasteriesuncertain_6',
+                shape: 'triangle',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(106,4,143,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Monasteriesuncertain_6');
+        map.getPane('pane_Monasteriesuncertain_6').style.zIndex = 406;
+        map.getPane('pane_Monasteriesuncertain_6').style['mix-blend-mode'] = 'normal';
+        var layer_Monasteriesuncertain_6 = new L.geoJson(json_Monasteriesuncertain_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Monasteriesuncertain_6',
+            layerName: 'layer_Monasteriesuncertain_6',
+            pane: 'pane_Monasteriesuncertain_6',
+            onEachFeature: pop_Monasteriesuncertain_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Monasteriesuncertain_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Monasteriesuncertain_6);
+        map.addLayer(layer_Monasteriesuncertain_6);
+        function pop_Others_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date</th>\
+                        <td>' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info</th>\
+                        <td>' + (feature.properties['Info'] !== null ? autolinker.link(feature.properties['Info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Others_7_0() {
+            return {
+                pane: 'pane_Others_7',
+                radius: 2.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Others_7');
+        map.getPane('pane_Others_7').style.zIndex = 407;
+        map.getPane('pane_Others_7').style['mix-blend-mode'] = 'normal';
+        var layer_Others_7 = new L.geoJson(json_Others_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Others_7',
+            layerName: 'layer_Others_7',
+            pane: 'pane_Others_7',
+            onEachFeature: pop_Others_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Others_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Others_7);
+        map.addLayer(layer_Others_7);
+        function pop_Churchescertain_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Start date</th>\
+                        <td>' + (feature.properties['Start date'] !== null ? autolinker.link(feature.properties['Start date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">End date</th>\
+                        <td>' + (feature.properties['End date'] !== null ? autolinker.link(feature.properties['End date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Saint</th>\
+                        <td>' + (feature.properties['Saint'] !== null ? autolinker.link(feature.properties['Saint'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Martyrs</th>\
+                        <td>' + (feature.properties['Martyrs'] !== null ? autolinker.link(feature.properties['Martyrs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Churchescertain_8_0() {
+            return {
+                pane: 'pane_Churchescertain_8',
+                radius: 1.2,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(118,195,154,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Churchescertain_8');
+        map.getPane('pane_Churchescertain_8').style.zIndex = 408;
+        map.getPane('pane_Churchescertain_8').style['mix-blend-mode'] = 'normal';
+        var layer_Churchescertain_8 = new L.geoJson(json_Churchescertain_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Churchescertain_8',
+            layerName: 'layer_Churchescertain_8',
+            pane: 'pane_Churchescertain_8',
+            onEachFeature: pop_Churchescertain_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Churchescertain_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Churchescertain_8);
+        map.addLayer(layer_Churchescertain_8);
+        function pop_Necropoli_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Info'] !== null ? autolinker.link(feature.properties['Info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Necropoli_9_0() {
+            return {
+                pane: 'pane_Necropoli_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(241,176,232,0.5215686274509804)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Necropoli_9');
+        map.getPane('pane_Necropoli_9').style.zIndex = 409;
+        map.getPane('pane_Necropoli_9').style['mix-blend-mode'] = 'normal';
+        var layer_Necropoli_9 = new L.geoJson(json_Necropoli_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Necropoli_9',
+            layerName: 'layer_Necropoli_9',
+            pane: 'pane_Necropoli_9',
+            onEachFeature: pop_Necropoli_9,
+            style: style_Necropoli_9_0,
+        });
+        bounds_group.addLayer(layer_Necropoli_9);
+        map.addLayer(layer_Necropoli_9);
+        function pop_Monasteries_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Saint(s)</th>\
+                        <td>' + (feature.properties['Saint(s)'] !== null ? autolinker.link(feature.properties['Saint(s)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date</th>\
+                        <td>' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info</th>\
+                        <td>' + (feature.properties['Info'] !== null ? autolinker.link(feature.properties['Info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Monasteries_10_0() {
+            return {
+                pane: 'pane_Monasteries_10',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,4,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Monasteries_10');
+        map.getPane('pane_Monasteries_10').style.zIndex = 410;
+        map.getPane('pane_Monasteries_10').style['mix-blend-mode'] = 'normal';
+        var layer_Monasteries_10 = new L.geoJson(json_Monasteries_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Monasteries_10',
+            layerName: 'layer_Monasteries_10',
+            pane: 'pane_Monasteries_10',
+            onEachFeature: pop_Monasteries_10,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Monasteries_10_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Monasteries_10);
+        map.addLayer(layer_Monasteries_10);
+        function pop_Martyrium_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date</th>\
+                        <td>' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info</th>\
+                        <td>' + (feature.properties['Info'] !== null ? autolinker.link(feature.properties['Info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Saint(s)</th>\
+                        <td>' + (feature.properties['Saint(s)'] !== null ? autolinker.link(feature.properties['Saint(s)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Martyrium_11_0() {
+            return {
+                pane: 'pane_Martyrium_11',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,201,168,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Martyrium_11');
+        map.getPane('pane_Martyrium_11').style.zIndex = 411;
+        map.getPane('pane_Martyrium_11').style['mix-blend-mode'] = 'normal';
+        var layer_Martyrium_11 = new L.geoJson(json_Martyrium_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Martyrium_11',
+            layerName: 'layer_Martyrium_11',
+            pane: 'pane_Martyrium_11',
+            onEachFeature: pop_Martyrium_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Martyrium_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Martyrium_11);
+        map.addLayer(layer_Martyrium_11);
+        function pop_Toledo_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Toledo_12_0(feature) {
+            switch(String(feature.properties['Type'])) {
+                case 'Islamic wall':
+                    return {
+                pane: 'pane_Toledo_12',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '10,5,1,5,1,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,0.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Palatine suburb':
+                    return {
+                pane: 'pane_Toledo_12',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,194,128,0.4)',
+                interactive: true,
+            }
+                    break;
+                case 'Necropolis':
+                    return {
+                pane: 'pane_Toledo_12',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Toledo_12');
+        map.getPane('pane_Toledo_12').style.zIndex = 412;
+        map.getPane('pane_Toledo_12').style['mix-blend-mode'] = 'normal';
+        var layer_Toledo_12 = new L.geoJson(json_Toledo_12, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Toledo_12',
+            layerName: 'layer_Toledo_12',
+            pane: 'pane_Toledo_12',
+            onEachFeature: pop_Toledo_12,
+            style: style_Toledo_12_0,
+        });
+        bounds_group.addLayer(layer_Toledo_12);
+        map.addLayer(layer_Toledo_12);
+        function pop_RomanremainsToledo_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RomanremainsToledo_13_0(feature) {
+            switch(String(feature.properties['Name'])) {
+                case 'Hypothetical tracing Roman circus':
+                    return {
+                pane: 'pane_RomanremainsToledo_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '1,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,200,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Visible remains Roman circus':
+                    return {
+                pane: 'pane_RomanremainsToledo_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,200,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Roman amphitheatre':
+                    return {
+                pane: 'pane_RomanremainsToledo_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,200,240,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RomanremainsToledo_13');
+        map.getPane('pane_RomanremainsToledo_13').style.zIndex = 413;
+        map.getPane('pane_RomanremainsToledo_13').style['mix-blend-mode'] = 'normal';
+        var layer_RomanremainsToledo_13 = new L.geoJson(json_RomanremainsToledo_13, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RomanremainsToledo_13',
+            layerName: 'layer_RomanremainsToledo_13',
+            pane: 'pane_RomanremainsToledo_13',
+            onEachFeature: pop_RomanremainsToledo_13,
+            style: style_RomanremainsToledo_13_0,
+        });
+        bounds_group.addLayer(layer_RomanremainsToledo_13);
+        map.addLayer(layer_RomanremainsToledo_13);
+        function pop_ChurchesToledo_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Date</th>\
+                        <td>' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Saint(s)</th>\
+                        <td>' + (feature.properties['Saint(s)'] !== null ? autolinker.link(feature.properties['Saint(s)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ChurchesToledo_14_0() {
+            return {
+                pane: 'pane_ChurchesToledo_14',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(117,145,255,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ChurchesToledo_14');
+        map.getPane('pane_ChurchesToledo_14').style.zIndex = 414;
+        map.getPane('pane_ChurchesToledo_14').style['mix-blend-mode'] = 'normal';
+        var layer_ChurchesToledo_14 = new L.geoJson(json_ChurchesToledo_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ChurchesToledo_14',
+            layerName: 'layer_ChurchesToledo_14',
+            pane: 'pane_ChurchesToledo_14',
+            onEachFeature: pop_ChurchesToledo_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ChurchesToledo_14_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_ChurchesToledo_14);
+        map.addLayer(layer_ChurchesToledo_14);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ChurchesToledo_14.png" /> Churches Toledo': layer_ChurchesToledo_14,'Roman remains Toledo<br /><table><tr><td style="text-align: center;"><img src="legend/RomanremainsToledo_13_HypotheticaltracingRomancircus0.png" /></td><td>Hypothetical tracing Roman circus</td></tr><tr><td style="text-align: center;"><img src="legend/RomanremainsToledo_13_VisibleremainsRomancircus1.png" /></td><td>Visible remains Roman circus</td></tr><tr><td style="text-align: center;"><img src="legend/RomanremainsToledo_13_Romanamphitheatre2.png" /></td><td>Roman amphitheatre</td></tr></table>': layer_RomanremainsToledo_13,'Toledo<br /><table><tr><td style="text-align: center;"><img src="legend/Toledo_12_Islamicwall0.png" /></td><td>Islamic wall</td></tr><tr><td style="text-align: center;"><img src="legend/Toledo_12_Palatinesuburb1.png" /></td><td>Palatine suburb</td></tr><tr><td style="text-align: center;"><img src="legend/Toledo_12_Necropolis2.png" /></td><td>Necropolis</td></tr></table>': layer_Toledo_12,'<img src="legend/Martyrium_11.png" /> Martyrium': layer_Martyrium_11,'<img src="legend/Monasteries_10.png" /> Monasteries': layer_Monasteries_10,'<img src="legend/Necropoli_9.png" /> Necropoli': layer_Necropoli_9,'<img src="legend/Churchescertain_8.png" /> Churches (certain)': layer_Churchescertain_8,'<img src="legend/Others_7.png" /> Others': layer_Others_7,'<img src="legend/Monasteriesuncertain_6.png" /> Monasteries (uncertain)': layer_Monasteriesuncertain_6,'<img src="legend/Churchesuncertain_5.png" /> Churches (uncertain)': layer_Churchesuncertain_5,'<img src="legend/Monasteriescertain_4.png" /> Monasteries (certain)': layer_Monasteriescertain_4,'<img src="legend/Mosques_3.png" /> Mosques': layer_Mosques_3,'<img src="legend/Mudunlayer_2.png" /> Mudun layer': layer_Mudunlayer_2,'<img src="legend/MadinatQurtuba_1.png" /> Madinat Qurtuba': layer_MadinatQurtuba_1,"Esri Gray (light)": layer_EsriGraylight_0,}).addTo(map);
+        setBounds();
+        resetLabels([layer_MadinatQurtuba_1,layer_Mudunlayer_2,layer_Mosques_3,layer_Monasteriescertain_4,layer_Churchesuncertain_5,layer_Monasteriesuncertain_6,layer_Others_7,layer_Churchescertain_8,layer_Necropoli_9,layer_Monasteries_10,layer_Martyrium_11,layer_Toledo_12,layer_RomanremainsToledo_13,layer_ChurchesToledo_14]);
+        map.on("zoomend", function(){
+            resetLabels([layer_MadinatQurtuba_1,layer_Mudunlayer_2,layer_Mosques_3,layer_Monasteriescertain_4,layer_Churchesuncertain_5,layer_Monasteriesuncertain_6,layer_Others_7,layer_Churchescertain_8,layer_Necropoli_9,layer_Monasteries_10,layer_Martyrium_11,layer_Toledo_12,layer_RomanremainsToledo_13,layer_ChurchesToledo_14]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_MadinatQurtuba_1,layer_Mudunlayer_2,layer_Mosques_3,layer_Monasteriescertain_4,layer_Churchesuncertain_5,layer_Monasteriesuncertain_6,layer_Others_7,layer_Churchescertain_8,layer_Necropoli_9,layer_Monasteries_10,layer_Martyrium_11,layer_Toledo_12,layer_RomanremainsToledo_13,layer_ChurchesToledo_14]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_MadinatQurtuba_1,layer_Mudunlayer_2,layer_Mosques_3,layer_Monasteriescertain_4,layer_Churchesuncertain_5,layer_Monasteriesuncertain_6,layer_Others_7,layer_Churchescertain_8,layer_Necropoli_9,layer_Monasteries_10,layer_Martyrium_11,layer_Toledo_12,layer_RomanremainsToledo_13,layer_ChurchesToledo_14]);
+        });
+        </script>
+    </body>
+</html>
